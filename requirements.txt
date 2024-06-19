@@ -21,3 +21,4 @@ requests-oauthlib
 sqlparse
 stripe
 urllib3
+django-pytest

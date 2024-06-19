@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+    .popup {
+    position: fixed;
+    top: 150px;
+    right: 190px;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 300px; /* Default width */
+    max-width: 90%; /* Ensure it doesn't exceed the viewport width */
+    max-height: 80%; /* Ensure it doesn't exceed the viewport height */
+    overflow-y: auto; /* Add scroll if content overflows */
+}
+
+.closebtn {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+}
+
+.item {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+
+}
+
+.view.overlay {
+    margin-bottom: 10px;
+}
+
+.card-img-top {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.item-details {
+    text-align: center;
+}
+
+
+
+
+</style>
+  <main>
+
+
+       <nav class="navbar navbar-expand-lg sticky-top navbar-dark mdb-color brown darken-2 mb-5 " >
+        <span class="navbar-brand">Categories:</span>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+
+           <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'core:'%}">All <span class="sr-only">(current)</span></a>
+            </li>
+            {% for key, value in categories %}
+                <li class="{% if key == category %} nav-item active {% endif %} nav-item">
+                    <a class="nav-link" href="{% url 'core:category' key %}">{{ value }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+          <form class="form-inline">
+            <div class="md-form my-0">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_parameter">
+                 <span class="search-label-icon"  style="color: white" onclick="searchFunction()">
+                       <i class="fas fa-search "></i>
+             </span>
+               {% if search_result %}
+
+<div class="popup" id="popup">
+    <span class="closebtn" id="closebtn">&times;</span>
+    <div class="items-container">
+        {% for item in search_result %}
+        <div class="item">
+            <div class="view overlay">
+                <img src="{{ item.image.url }}" class="card-img-top">
+                <a href="{{ item.get_absolute_url }}">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <div class="item-details">
+                <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}</a>
+               <h4 class="font-weight-bold blue-text">
+
+                  <strong>$
+                  {% if item.discount_price %}
+                  {{ item.discount_price }}
+                  {% else %}
+                  {{ item.price }}
+                  {% endif %}
+                  </strong>
+                </h4>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </nav>
+      <!--/.Navbar-->
+<div style="padding-left: 35px; padding-right: 35px">
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <div class="row wow fadeIn">
+
+          {% for item in object_list %}
+          <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="card">
+
+              <div class="view overlay">
+                  <img src="{{ item.image.url }}" class="card-img-top">
+                <a href="{{ item.get_absolute_url }}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <div class="card-body text-center">
+
+                  <h5 style="color: #6c757d">{{ item.get_category_display }}</h5>
+                <h5>
+                  <strong>
+                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
+
+                    </a>
+                  </strong>
+                </h5>
+
+                <h4 class="font-weight-bold blue-text">
+                  <strong>$
+                  {% if item.discount_price %}
+                  {{ item.discount_price }}
+                  {% else %}
+                  {{ item.price }}
+                  {% endif %}
+                  </strong>
+                </h4>
+
+              </div>
+
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+      </section>
+      <!--Section: Products v.3-->
+<div>
+    </div>
+    </main>
+
+<script>
+    function searchFunction() {
+        var search = document.getElementsByName('search_parameter')[0].value;
+        var encodedSearch = encodeURIComponent(search);
+       // Assuming category is accessible this way
+        window.location.href = "/search_product_in_category_page/" + "{{category}}" + "/" + encodedSearch + "/";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var closeBtn = document.getElementById("closebtn");
+        var popup = document.getElementById("popup");
+
+        if (closeBtn && popup) {
+            closeBtn.addEventListener("click", function(event) {
+                event.preventDefault();
+                popup.style.display = "none";
+            });
+        }
+    });
+    </script>
+{% endblock content %}
+
+

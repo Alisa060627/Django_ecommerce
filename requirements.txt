@@ -1,0 +1,10 @@
+Django>=3.2,<4.0
+django-allauth>=0.44.0
+django-crispy-forms>=1.11.0
+crispy-bootstrap4
+django-countries>=7.0
+stripe>=2.60.0
+pytz>=2021.1
+sqlparse>=0.4.1
+pytest>=6.2
+pytest-django>=4.4

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text ">
+      <div class="row wow fadeIn">
+        <div class="col-md-5 mb-4">
+
+          <img src="{{ object.image.url }}" class="img-fluid" style="height: 400px">
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge mr-1 " style="background-color: #b490ca">{{ object.get_category_display }}</span>
+              </a>
+            </div>
+
+            <p class="lead">
+              {% if object.discount_price %}
+              <span class="mr-1">
+                <del>${{ object.price }}</del>
+              </span>
+              <span>${{ object.discount_price }}</span>
+              {% else %}
+              <span>${{ object.price }}</span>
+              {% endif %}
+            </p>
+            <p class="lead font-weight-bold">Description</p>
+
+            <p>{{ object.description }}</p>
+
+
+            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-md" style="background-color: #832a4e; color: white;">
+              Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-12 text-center">
+
+          <h4 class="my-4 h4">Additional information about the product</h4>
+
+
+        </div>
+
+
+    </div>
+
+
+    </div>
+    <pre style="font-family: Roboto, sans-serif; font-size: larger;margin-left: 5%; margin-right: 5%;color: #4e555b" >{{ object.additional_info }}</pre>
+
+
+  </main>
+
+{% endblock content %}

@@ -67,7 +67,7 @@ You can also sign up as a new user, but you won't have access to the administrat
 
 - Shopping cart
 
-After logging in, you can navigate to the product details again and add products to your cart. You can then view your cart by clicking on the cart image in the top right corner of every page on the website. In the shopping cart, you can adjust the quantity of products and proceed to checkout or continue shopping.
+After logging in, you can navigate to the product details again and add desired product to your cart. It will redirect you to your cart, but you can also view it by clicking on the cart image in the top right corner of every page on the website. In the shopping cart, you can adjust the quantity of products and proceed to checkout or continue shopping.
 
 - Checkout
 

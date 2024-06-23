@@ -59,7 +59,7 @@ For better testing of the application, you should authorize as an admin user wit
 -  Username: admin
 - Password: 19455427
 
-The application will ask you to verify the email. Click on the link that appears in the terminal to verify. Then, press the "Confirm" button to complete the verification process. After this, you will be logged in as an admin user, allowing you to access administrative features of the application.
+The application will ask you to verify the email. Click on the link that appears in the terminal to verify. Then, press the "Confirm" button to complete the verification process. After this, you can logg in as an admin user.
 
 - Authorization as a simple user
 
